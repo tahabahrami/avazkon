@@ -1,0 +1,343 @@
+/* Prompt Tag Styles */
+.prompt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  max-width: 100%;
+  word-break: break-word;
+  animation: tagSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.prompt-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.prompt-tag:hover::before {
+  left: 100%;
+}
+
+/* Public Prompt Tag */
+.prompt-tag-public {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.prompt-tag-public:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Premium Prompt Tag (Secret but not private) */
+.prompt-tag-premium {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: 2px solid rgba(240, 147, 251, 0.3);
+  box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+}
+
+.prompt-tag-premium:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+  border-color: rgba(240, 147, 251, 0.5);
+}
+
+.prompt-tag-premium .tag-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.prompt-tag-premium .tag-cost {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.prompt-tag-premium .tag-cost::before {
+  content: '💎';
+  font-size: 0.6rem;
+}
+
+/* Restricted Prompt Tag (Secret and private) */
+.prompt-tag-restricted {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: white;
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.prompt-tag-restricted:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  border-color: rgba(255, 107, 107, 0.5);
+}
+
+/* Error Prompt Tag */
+.prompt-tag-error {
+  background: linear-gradient(135deg, #ffa726 0%, #ff7043 100%);
+  color: white;
+  border: 2px solid rgba(255, 167, 38, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
+}
+
+.prompt-tag-error:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 167, 38, 0.4);
+}
+
+/* Tag Text */
+.tag-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Remove Button */
+.tag-remove {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: inherit;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.tag-remove:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.tag-remove:active {
+  transform: scale(0.95);
+}
+
+/* Animations */
+@keyframes tagSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes tagPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .prompt-tag {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    gap: 4px;
+  }
+  
+  .prompt-tag-premium .tag-cost {
+    font-size: 0.65rem;
+    padding: 1px 4px;
+  }
+  
+  .tag-remove {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .prompt-tag {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 16px;
+  }
+  
+  .prompt-tag-premium .tag-content {
+    gap: 1px;
+  }
+  
+  .prompt-tag-premium .tag-cost {
+    font-size: 0.6rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .prompt-tag {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .prompt-tag:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .prompt-tag {
+    border-width: 3px;
+    font-weight: 600;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .prompt-tag {
+    animation: none;
+    transition: none;
+  }
+  
+  .prompt-tag:hover {
+    transform: none;
+  }
+  
+  .prompt-tag::before {
+    display: none;
+  }
+}
+
+/* Tooltip Styles */
+.prompt-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  z-index: 1000;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.3s ease-out;
+}
+
+.tooltip-content {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.tooltip-thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.tooltip-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.tooltip-creator {
+  font-weight: 600;
+  color: #ffffff;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Tooltip arrow */
+.prompt-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Tooltip animations */
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Mobile responsive tooltip */
+@media (max-width: 768px) {
+  .prompt-tooltip {
+    position: fixed;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0;
+  }
+  
+  .tooltip-content {
+    min-width: 250px;
+    max-width: 300px;
+    padding: 16px;
+  }
+  
+  .tooltip-thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .tooltip-info {
+    font-size: 0.9rem;
+  }
+  
+  .prompt-tooltip::after {
+    display: none;
+  }
+}
